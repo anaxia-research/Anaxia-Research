@@ -1,6 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
-\usepackage[a4paper,margin=26mm]{geometry}
+\usepackage[a4paper,margin=23mm]{geometry}
 \usepackage{amsmath,amssymb,booktabs,microtype}
 \usepackage[hidelinks]{hyperref}
 \setlength{\parskip}{5pt}
@@ -35,7 +35,7 @@ Lean verifies this universal theorem. The Julia script enumerates the 16 residue
 with exact rational coefficients and rejects a changed constant. It also verifies $x(x-1)=-1/4$ at $x=1/2$. The same polynomial is nonnegative at every integer, illustrating why the domain is part of the statement.
 
 \section{Evaluation}
-Lean 4.34.1 verified eight theorems. Six have no printed axiom dependencies. The two modular theorems use the standard Lean principles \texttt{propext} and \texttt{Quot.sound}~\cite{lean}. Source and validation records are in the repository. The independent Julia script uses \texttt{BigInt} and exact rational arithmetic~\cite{julia}. Its execution status is recorded in the repository's validation reports and workflow logs.
+Lean 4.34.1 verified eight theorems. Six have no printed axiom dependencies. The two modular theorems use the standard Lean principles \texttt{propext} and \texttt{Quot.sound}~\cite{lean}. Julia 1.10.13 passed 17 assertions using \texttt{BigInt} and exact rational arithmetic~\cite{julia}. The repository retains the source hashes and \href{https://github.com/creelie/Anaxia-Research/actions/runs/43609560559}{verification run}.
 
 \begin{center}
 \begin{tabular}{lll}

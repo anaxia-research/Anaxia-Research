@@ -7,8 +7,8 @@ This is a local preparation checklist. The package has not been submitted, accep
 - [ ] Confirm authorship, acknowledgments, funding, and conflicts of interest.
 - [ ] Confirm that the methods/software contribution is sufficiently original for the selected submission type. The mathematical examples are replications.
 - [ ] Review the AI-assistance disclosure and confirm it accurately describes the work.
-- [ ] Re-run Lean with the recorded toolchain and inspect every printed axiom dependency.
-- [ ] Run Julia independently and retain the actual verification output. An unexecuted script is not a passed check.
+- [x] Re-run Lean with the recorded toolchain and inspect every printed axiom dependency.
+- [x] Run Julia independently and retain the [verification output](reports/julia-verification.toml).
 - [ ] Replace any pending runtime or benchmark field using actual execution records.
 - [ ] Review all citations against the primary sources and preserve established-result attribution.
 - [ ] Confirm data/code availability, source revision, and a license approved by the author.

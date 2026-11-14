@@ -8,7 +8,7 @@ Affiliation and corresponding-author contact: to be supplied by the author befor
 
 ## Abstract
 
-Mathematical research assistants can generate useful strategies while producing claims that exceed their evidence. We describe a reproducible software design that separates public model proposals, exact computational certificates, and kernel-checked mathematical statements. The accompanying package contains eight Lean 4.34.1 theorems and an independent Julia replication script using arbitrary-precision integer and rational arithmetic. The Lean artifacts verify an explicit 24-vector `D4` construction and the elementary universal obstruction to writing three as a sum of two integer squares. Printed axiom dependencies are retained. A polynomial sum-of-squares identity, a tampered-identity control, and a rational counterexample illustrate why certificate equality and domain preservation are necessary. Companion finite conjecture experiments and a local-model smoke test are reported with their actual scopes. The local Lean run succeeded; Julia was unavailable in the authoring environment, and a separate CI workflow is configured to execute the replication. The contribution is an inspectable implementation and evaluation protocol, rather than a new mathematical theorem or a general conjecture solver. No newly verified global closure of the named research conjectures is reported.
+Mathematical research assistants can generate strategies whose claims exceed their evidence. We describe a reproducible software design that records model proposals, exact certificates, and kernel-checked statements. Eight Lean 4.34.1 theorems verify the geometry of a 24-vector `D4` construction and the universal obstruction to writing three as a sum of two integer squares. An independent Julia 1.10.13 replication passed 17 assertions using exact arithmetic. A changed polynomial coefficient and a rational counterexample test preservation of the statement and its domain. We report finite conjecture experiments and local model attempts with their recorded scopes. The evaluation yielded zero new global conjecture closures.
 
 **Keywords:** mathematical software; formal verification; Lean; Julia; exact arithmetic; proof certificates; local language models; reproducibility.
 
@@ -81,7 +81,7 @@ The validator records runtime versions, source SHA-256 hashes, exit statuses, th
 
 ## 5. Recorded evaluation
 
-The local Lean run returned success for eight named theorems. Julia was not installed in the local authoring environment, so the local record explicitly marks that replication `runtime_unavailable`. The presence of a Julia script or workflow is not reported as a successful Julia run; the corresponding actual CI log is required to establish execution.
+Lean 4.34.1 checked eight named theorems locally and on GitHub. Julia 1.10.13 passed all 17 assertions on GitHub. The saved verification record includes runtime versions and source hashes. [Verification run](https://github.com/creelie/Anaxia-Research/actions/runs/43609560559).
 
 The companion Anaxia standard challenge snapshot contains the following exact finite experiments:
 
@@ -101,7 +101,7 @@ A local llama.cpp CPU smoke test reused existing model weights and successfully 
 
 The package does not prove Hodge, Yang–Mills existence and mass gap, the Riemann hypothesis, or the proposed reflexive-polytope descent bound. It does not establish a new error in an arXiv article. Finite tests, public model suggestions, and a known construction do not meet those proof obligations.
 
-The evaluation is a small reproducibility study, with no controlled comparison across model families, no calibrated success-rate estimate, and no claim of general mathematical intelligence. Formalizing an informal statement correctly remains a substantive human task. Julia replication requires an actual execution record, and the manuscript's metadata and declarations require author review.
+The evaluation is a small reproducibility study. It supplies no controlled comparison across model families or calibrated success-rate estimate. Formalizing an informal statement correctly remains a substantive human task. The manuscript's metadata and declarations require author review.
 
 Future work can add independently validated formalization tasks, stronger certificate formats, adversarial tests, and controlled model comparisons. Every extension should preserve fixed statements, explicit domains, bounded resources, retained failures, and a checkable route from proposed evidence to the claimed conclusion.
 
