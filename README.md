@@ -10,10 +10,11 @@ This companion to [Anaxia](https://github.com/creelie/Anaxia) separates model-ge
 | --- | --- |
 | [Lean certificates](lean/Certificates.lean) | Eight checked theorems: 24 distinct `D4` vectors, exact norms and pair separation, a distance witness, integer squares modulo four, an elementary integer impossibility, and a positive control. |
 | [Julia replication](julia/verify.jl) | Independent `BigInt`/rational calculations for the known `D4` construction, SOS coefficient identity, a tampered identity, a rational counterexample, and modular residue tables. |
+| [D4 spectral bound in Lean](lean/D4Spectral.md) · [Independent Julia replay](julia/verify_d4_intermediate_grid.jl) | Lean proves the sharp rational-cube bound of $-9$. Julia checks all 648 period-six characters and the equality packing. The [written proof](https://github.com/creelie/Anaxia/blob/main/docs/D4-INTERMEDIATE-GRID.md) extends the bound to arbitrary packings supported on the specified grid. |
 | [GitHub verification record](reports/ci-validation.json) · [Local Lean run](reports/validation.json) | Runtime status, source hashes, theorem count, and printed axiom dependencies. |
 | [Methods manuscript](paper/manuscript.md) · [LaTeX](paper/manuscript.tex) · [PDF](paper/manuscript.pdf) | An editable methods draft and compiled copy for author review. |
 
-The mathematical examples are established constructions and elementary facts. The package does not claim a new closure of Hodge, Yang–Mills, the Riemann hypothesis, a reflexive-descent bound, or four-dimensional kissing optimality. See [proof scope](PROOF-SCOPE.md) and [source attribution](DATA.md).
+The library includes established constructions, elementary facts, and the fixed-grid packing calculation. See [proof scope](PROOF-SCOPE.md) and [source attribution](DATA.md).
 
 ## Reproduce the proofs
 
@@ -21,12 +22,14 @@ Use an already installed Lean 4.34.1 toolchain:
 
 ```sh
 lean +leanprover/lean4:v4.34.1 lean/Certificates.lean
+lean +leanprover/lean4:v4.34.1 lean/D4Spectral.lean
 ```
 
 Run the independent Julia checks with Julia 1.10+:
 
 ```sh
 julia --startup-file=no julia/verify.jl --output reports/julia-verification.toml
+julia --startup-file=no julia/verify_d4_intermediate_grid.jl
 ```
 
 To capture both execution logs and source hashes with Python 3.11+:

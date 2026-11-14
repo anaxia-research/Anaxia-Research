@@ -21,9 +21,13 @@ The modular impossibility is a universal integer theorem, proved through congrue
 
 `#print axioms` records the transitive axiom dependencies. Six listed theorems have none; `square_mod_four` and `no_integer_sum_squares_three` depend on the standard Lean principles `propext` and `Quot.sound`. The file declares no extra axioms and uses no proof placeholders or native-evaluation proof shortcuts.
 
+[`D4Spectral.lean`](lean/D4Spectral.lean) checks the bound $-9$ for the weighted adjacency polynomial on the rational cube and verifies a rational equality point. The written fixed-grid proof extends the bound to the real cube by continuity and gives the Fourier, density, and attainability arguments. [Lean proof scope](lean/D4Spectral.md) · [Fixed-grid proof](https://github.com/creelie/Anaxia/blob/main/docs/D4-INTERMEDIATE-GRID.md)
+
 ## Independent Julia checks
 
 The Julia script constructs the vectors from coordinate positions and signs, independently of Lean's explicit list. It uses arbitrary-precision integers and exact rational coefficients. A successful run checks all 276 unordered distances, reconstructs a polynomial SOS identity coefficient by coefficient, rejects a tampered identity, and evaluates a rational counterexample exactly.
+
+The [D4 grid replay](julia/verify_d4_intermediate_grid.jl) computes the period-six spectrum directly in exact cyclotomic arithmetic, checks its agreement with the cosine polynomial on 648 characters, and checks all 2,556 pairs in the 72-site equality packing. [Recorded replay](reports/d4-intermediate-grid.toml)
 
 Julia execution is computational replication, not a Lean theorem. A script's presence is not evidence that it ran. `reports/validation.json` and the retained logs distinguish executed checks from unavailable runtimes.
 
