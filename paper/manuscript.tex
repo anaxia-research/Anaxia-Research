@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=26mm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+\title{Reproducible Evidence Gates for Local-Model Mathematical Research}
+\author{Deep Bhattacharjee\\\small ORCID: \href{https://orcid.org/0000-0003-0466-750X}{0000-0003-0466-750X}}
+\date{Working methods manuscript}
+\begin{document}
+\maketitle
+\begin{abstract}
+We describe a mathematical research workbench that records model proposals separately from exact computational evidence and kernel-checked theorems. The companion artifacts verify the integer geometry of the known 24-point $D_4$ construction and prove that three cannot be written as a sum of two integer squares. Exact polynomial expansion and a rational counterexample test whether the workbench preserves a statement's coefficients and domain. We report bounded experiments on four classical number theory conjectures and five model-assisted research attempts. The software demonstrates reproducible verification on the supported statements. The runs yielded zero new conjecture closures.
+\end{abstract}
+
+\section{Method}
+The workbench starts with a source reference and a precise mathematical statement. A model may propose a strategy, certificate, or counterexample. The verifier recomputes the proposed evidence against the saved statement. For example, a sum-of-squares certificate for a polynomial $p$ requires exact coefficient equality with $\sum_i w_i q_i^2$ and $w_i\geq 0$. A counterexample requires a point in the specified domain and an exact evaluation that violates the claim. The report retains the statement hash, evidence, and verification result. Source excerpts and model suggestions are treated as data. A researcher reviews whether the formal statement faithfully represents the source.
+
+\section{Mathematical artifacts}
+\subsection{The $D_4$ construction}
+The vectors with two nonzero coordinates equal to $\pm1$ in $\{-1,0,1\}^4$ number $\binom42 2^2=24$. The Lean file verifies that the explicit list is distinct, that every squared norm equals two, and that every distinct pair has squared distance at least two. A displayed pair attains two. The Julia replication generates the coordinates independently and checks 276 pair distances. The squared distance histogram is $(96,72,96,12)$ at distances squared $(2,4,6,8)$.
+
+The scaled centers $\sqrt{2}\,v$ have distance two from the origin and pairwise distances at least two, so unit spheres there give a 24-sphere kissing configuration. The four-dimensional upper bound is due to Musin~\cite{musin}. The Lean artifacts concern the listed vectors and their integer norms and distances.
+
+\subsection{A modular impossibility and a domain control}
+Integer squares have residues zero or one modulo four. Their pairwise sums have residues zero, one, or two, which proves
+\[
+\forall x,y\in\mathbb Z,\qquad x^2+y^2\ne 3.
+\]
+Lean verifies this universal theorem. The Julia script enumerates the 16 residue pairs and checks the positive control $1^2+1^2=2$. For the polynomial example, it expands the identity
+\[
+\tfrac43x^2-2xy+y^2+\tfrac23x+\tfrac13=(x-y)^2+\tfrac13(x+1)^2
+\]
+with exact rational coefficients and rejects a changed constant. It also verifies $x(x-1)=-1/4$ at $x=1/2$. The same polynomial is nonnegative at every integer, illustrating why the domain is part of the statement.
+
+\section{Evaluation}
+Lean 4.34.1 verified eight theorems. Six have no printed axiom dependencies. The two modular theorems use the standard Lean principles \texttt{propext} and \texttt{Quot.sound}~\cite{lean}. Source and validation records are in the repository. The independent Julia script uses \texttt{BigInt} and exact rational arithmetic~\cite{julia}. Its execution status is recorded in the repository's validation reports and workflow logs.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Experiment & Checked cases & Witness predicate \\
+\midrule
+Collatz & 10,000 & Orbit reaches 1 \\
+Even Goldbach & 4,999 & Sum of two primes \\
+Legendre & 500 & Prime between squares \\
+Erd\H{o}s--Straus & 199 & Three positive unit fractions \\
+$D_4$ roots & 276 pairs & Squared distance at least 2 \\
+\bottomrule
+\end{tabular}
+\end{center}
+The number theory experiments establish their stated finite ranges. The local CPU model completed a proposal smoke test and a two-call reasoning round. The quadratic proof came from the deterministic solver. Five further attempts considered Hodge, Yang--Mills, the Riemann hypothesis, a proposed reflexive-descent bound of 24, and the $D_4$ kissing configuration. Model output remained advisory. The evaluation is a reproducibility demonstration with familiar examples and has no comparative model success-rate estimate.
+
+\section*{Data and declarations}
+The \href{https://github.com/creelie/Anaxia-Research}{companion repository} contains proof sources, computational checks, and validation records. The \href{https://github.com/creelie/Anaxia}{workbench} contains the verification code and challenge evidence. An AI coding assistant assisted implementation and drafting. Author review, affiliation, correspondence, funding, and competing-interest statements are pending. This editable manuscript is prepared for review before any submission.
+
+\begin{thebibliography}{9}
+\bibitem{musin} O. R. Musin. The kissing number in four dimensions. \textit{Annals of Mathematics}, 168:1--32, 2008. \href{https://arxiv.org/abs/math/0309430v3}{arXiv:math/0309430v3}.
+\bibitem{lean} Lean Project. \href{https://lean-lang.org/theorem_proving_in_lean4/Axioms-and-Computation/}{Theorem Proving in Lean 4: Axioms and Computation}.
+\bibitem{julia} Julia Project. \href{https://docs.julialang.org/en/v1/manual/complex-and-rational-numbers/}{The Julia Language: Complex and Rational Numbers}.
+\end{thebibliography}
+\end{document}

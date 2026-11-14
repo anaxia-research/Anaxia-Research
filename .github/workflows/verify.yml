@@ -1,0 +1,41 @@
+name: Verify Lean and Julia artifacts
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean toolchain
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.10'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run both proof artifact checks
+        run: python scripts/validate.py --lean "$(command -v lean)" --julia "$(command -v julia)" --require-julia
+      - name: Retain actual logs and verification records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-verification-records
+          path: reports/
+          if-no-files-found: warn
